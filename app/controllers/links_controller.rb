@@ -34,6 +34,10 @@ class LinksController < ApplicationController
   def shortProcess
     @link = Link.where(:shortlink => params[:id]).take
     if @link
+      @click = @link.clicks.new
+      @click.browser = browser.name
+      @click.os = browser.platform
+      @click.save
       redirect_to @link.link
     else
       render :file => "#{Rails.root}/public/404.html", :status => 404  
