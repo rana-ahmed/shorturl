@@ -40,7 +40,26 @@ class LinksController < ApplicationController
       @click.save
       redirect_to @link.link
     else
-      render :file => "#{Rails.root}/public/404.html", :status => 404  
+      show_404
+    end
+  end
+
+  def analytics
+    if params[:url]
+      url = params[:url].delete(' ')
+      if url.start_with?(root_url)
+        shortlink = params[:url].split(root_url)[1]
+        @data = Link.where(:shortlink => shortlink).take
+        if @data
+          render "report"
+        else
+          show_404
+        end
+      else
+        show_404
+      end
+    else
+      show_404
     end
   end
 
@@ -53,6 +72,10 @@ class LinksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through
     def link_params
       params.require(:link).permit(:link)
+    end
+
+    def show_404
+      render :file => "#{Rails.root}/public/404.html", :status => 404
     end
 
     #generating random string

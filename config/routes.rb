@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :links, only: [:new, :create]
+  get 'analytics' => 'links#analytics', as: 'analytics'
   root 'links#new'
   get '/*id', to: 'links#shortProcess', constraints: { id: /\w+/ }
 

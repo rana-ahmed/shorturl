@@ -2,4 +2,12 @@
 
 <%= render 'form' %>
 
+<br><br><br><br><br>
+<h1>Looking for link analytics</h1>
+<%= form_tag analytics_path, :method => 'get' do %>
+<%= label_tag :url, "put your link here" %>
+<%= text_field_tag :url, params[:url] %>
+<%= submit_tag 'Search', :name => nil %>
+<% end -%>
+
 <%= link_to 'Back', links_path %>
