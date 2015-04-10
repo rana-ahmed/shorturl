@@ -1,4 +1,4 @@
-<h1>Total <%= @data.clicks.count %> Clicks, for <%= link_to root_url + @data.shortlink %></h1>
+<h1>Total <%= @data.clicks.count %> Clicks, for <%= link_to root_url + @data.shortlink, root_url + @data.shortlink %></h1>
 <%= image_tag "https://api.qrserver.com/v1/create-qr-code/?data=#{root_url + @data.shortlink}&amp;size=10x10" %>
 <h1>Platforms</h1>
 <%= pie_chart @data.clicks.group(:os).count %>
