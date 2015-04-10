@@ -48,7 +48,7 @@ class LinksController < ApplicationController
     if params[:url]
       url = params[:url].delete(' ')
       if url.start_with?(root_url)
-        shortlink = params[:url].split(root_url)[1]
+        shortlink = url.split(root_url)[1]
         @data = Link.where(:shortlink => shortlink).take
         if @data
           render "report"
